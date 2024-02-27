@@ -1,0 +1,34 @@
+\documentclass{article}
+\usepackage{src/template}
+\hypersetup{pdftitle={A quadratic voting system}}
+
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+		\vspace*{1cm}
+		\Huge\textbf{MdTexDiary}\\
+    \vspace{0.5cm}
+    \Large\textbf{A template for markdown notes}\\
+		\vspace{2cm}
+		\textbf{Author name}: sample@mail.com
+		\vfill
+		Version: \today
+		\vspace{0.8cm}
+	\end{center}
+\end{titlepage}
+
+%\currentpdfbookmark{Table of contents}{name}
+\tableofcontents
+\clearpage
+
+\foreach\num in {0,1,...,10} {
+		\IfFileExists{pages/\num.md} {
+			\begin{large}
+				\markdownInput{pages/\num.md}
+			\end{large}
+      %\pagebreak
+			\noindent\hrulefill
+			\vspace{5mm}
+		}{}
+	}
+\end{document}

@@ -1,0 +1,58 @@
+\documentclass{tufte-book}
+\usepackage[utf8]{inputenc}
+\usepackage{url, verse}
+\usepackage{tikz}
+\usepackage{xifthen}
+\usetikzlibrary{positioning,shadows,arrows}
+
+\newenvironment{loggentry}[2]% date, heading
+{\noindent\textbf{#2}\marginnote{#1}\par}{\vspace{0.5cm}}
+
+\def\?#1{}
+
+\newcommand{\dlg}[1]{''{#1}''}
+\newcommand{\thg}[1]{''{\it {#1}}''}
+
+\newcommand{\writetitle}{0}
+\newcommand{\mytitle}[1]
+{   \ifthenelse{\writetitle=1}{#1}{}
+}
+
+\newread\mysource
+
+
+\begin{document}
+
+\begin{titlepage}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\center
+
+\HRule \\[0.4cm]
+{\huge \bfseries Escritos 2021\\[0.1cm]}
+\emph Daniel Sánchez
+\HRule \\[1.5cm]
+
+\vfill
+\end{titlepage}
+
+\foreach \Genre in {Prose, Poetry}{
+    \foreach \N in {1,...,30}{
+        \IfFileExists{2021/\Genre/\N}{
+            \openin\mysource=2021/\Genre/\N.tex
+                \read\mysource to \firstline
+                    \closein\mysource
+                    \xdef\writetitle{1}
+                    \begin{loggentry}{\huge No. \N}{\firstline}
+                        \xdef\writetitle{0}
+                        \input{2021/\Genre/\N}\\
+                        \noindent\rule{\linewidth}{0.5mm}\\[1cm]
+                    \end{loggentry}
+        }
+        {   % files does not exist, so nothing to d
+        }
+    }
+}
+
+
+\end{document}

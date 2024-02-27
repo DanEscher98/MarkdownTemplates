@@ -1,0 +1,30 @@
+\documentclass{article}
+\usepackage{template}
+
+\begin{document}
+\begin{titlepage}
+	\begin{center}
+		\vspace*{1cm}
+		\Huge\textbf{Daily Notes}\\ % SET THE TITLE
+		\vspace{1.5cm}
+		\textbf{The Author} % SET THE AUTHOR
+		\vfill
+		Version: \today
+		\vspace{0.8cm}
+	\end{center}
+\end{titlepage}
+
+%\currentpdfbookmark{Table of contents}{name}
+\tableofcontents
+\clearpage
+
+\foreach\num in {1,2,...,20} {
+		\IfFileExists{pages/\num.md} {
+			\begin{large}
+				\markdownInput{pages/\num.md}
+			\end{large}
+			\noindent\hrulefill
+			\vspace{5mm}
+		}{}
+	}
+\end{document}
